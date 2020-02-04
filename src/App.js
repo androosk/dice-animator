@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Die from './components/Die'
 
-function App() {
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dieNumOne: "one",
+      dieNumTwo: "one"
+    }
+  }
+  render() {
+  const dieRoll = () => {
+    const dieString = ["one", "two", "three", "four", "five", "six"];
+    this.setState({dieNumOne : dieString[Math.floor(Math.random()*6)], dieNumTwo : dieString[Math.floor(Math.random()*6)]});
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Die num={this.state.dieNumOne}/>
+        <Die num={this.state.dieNumTwo}/>
+      </div>
+      <div>
+        <button type="button" className="btn btn-success" onClick={() => dieRoll()}>Roll dem bones!</button>
+      </div>
     </div>
   );
+}
 }
 
 export default App;
